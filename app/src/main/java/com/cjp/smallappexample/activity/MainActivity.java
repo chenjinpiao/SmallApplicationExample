@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.cjp.smallappexample.R;
 import com.cjp.smallappexample.base.BaseFragment;
@@ -60,8 +63,20 @@ public class MainActivity  extends FragmentActivity{
         setListener();
         //发送消息
         setMessage();
+
+        Toast.makeText(MainActivity.this, getChannel(), Toast.LENGTH_SHORT).show();
     }
 
+    private String getChannel(){
+        PackageManager packageManager = getPackageManager();
+        try {
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(getPackageName(),PackageManager.GET_META_DATA);
+            return applicationInfo.metaData.getString("UMENG_CHANNEL");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
     private void setMessage() {
         //获取通知管理器，用于发送通知
         NotificationManager notificationManager =

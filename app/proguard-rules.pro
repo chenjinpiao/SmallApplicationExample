@@ -19,3 +19,32 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keepclasseswithmembernames class *{
+    native<methods>;
+}
+
+-keepclassmembers public class * extends android.view.View {
+    void set*(***);
+    *** get*();
+}
+
+-keepclassmembers class * extends android.app.Activity{
+    public void *(android.view.View);
+}
+
+-keep class * implements android.os.Parcelable{
+    public static final android.os.Parcelable$Creator *;
+}
+
+-keepclassmembers class **.R$*{
+    public static <fields>;
+}
+
+-assumenosideeffects class android.util.Log{
+    public static boolean isLoggable(java.lang.String,int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}

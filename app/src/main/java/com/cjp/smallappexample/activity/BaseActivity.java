@@ -15,6 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -25,4 +26,5 @@ public class BaseActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
 }
